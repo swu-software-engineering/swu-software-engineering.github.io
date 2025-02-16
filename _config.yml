@@ -1,6 +1,7 @@
 # Site settings
 title: C语言项目展示
 SEOTitle: SWU-2024级软件工程2班-c语言项目展示
+header-img: img/SWU.jpg
 url:  # your host, for absolute URL
 baseurl: "" # for example, '/blog' if your blog hosted on 'host/blog'
 
