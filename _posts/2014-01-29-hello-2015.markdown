@@ -1,116 +1,128 @@
 ---
 layout:     post
-title:      "【循环语句综合】"
+title:      "【厨神助理系统】"
 subtitle:   " \"角谷猜想 AND STEMA 测评 AND 墨点覆盖\""
-date:       2024-10-10 00:00:00
-author:     
+date:       2024-12-14 00:00:00
+author:     2024级软件工程01班姬子鹏
 header-img: "img/post-bg-2015.jpg"
 catalog: true
 
 ---
 
-## 题目描述
+# 作品简介
 
-1.角谷猜想
-【题目描述】
-所谓角谷猜想，是指对于任意一个正整数，如果是奇数，则乘 3 加 1，如果是偶数，则除以 2，得到的结果再按照上述规则重复处理，最终总能够得到 1。如，假定初始整数为 5，计算过程分别为
-
-5→16→8→4→2→1。
-
-【输入】
-一个正整数N(N≤2,000,000)。
-
-【输出】
-从输入整数到 1 的步骤，每一步为一行，每一部中描述计算过程。最后一行输出"End"。如果输入为 1 ，直接输出"End"。数据保证每次数字变动后不会超过int范围。
-
-【输入样例】
-5
-
-【输出样例】
-5*3+1=16 
-
-16/2=8 
-
-8/2=4 
-
-4/2=2 
-
-2/2=1 
-
-End（5分）
+通过菜单，以完成菜谱输入，查询，分类，推荐等功能，此外，还添加了同菜不同名的映射检测机制以及个性化推荐机制。
 
 ---
 
-2.STEMA测评
-【题目描述】
-此次测评，蓝桥杯青少组启用了全新的 STEMA 测评。成绩与证书的对应关系如下
+# 程序特色
+### 同菜不同名映射检测：
+在实际生活中，我们常常会因为生活地区的不同而对相同的菜有着不同的叫法，为避免用户在使用此系统时出现以上情况，该程序采用了映射体结构来存储同名不同菜的检测。
 
-排名证书等级
+```c
+void del() {
+    system("cls");
+    char name[20];
+    int found = 0;
+    printf("请输入你要删除的菜名：\n");
+    scanf("%s", name);
+    char mappedName[20];
+    //定义一个映射名字，检测出是否存在同菜不同名的情况
+    //比如宫保鸡与宫保鸡丁指向同一道菜，我们可以定义一个结构体来存储这些映射进而在检索名字时进行检测
+    strcpy(mappedName, name); // 复制输入的菜名
+    for (int i = 0; mappings[i].original[0] != '\0'; i++) {
+    // 检测是否为空字符，若不是，则继续遍历
+        if (strcmp(name, mappings[i].original) == 0) {
+        //比较用户输入的名字与映射数组的名字
+            strcpy(mappedName, mappings[i].mapped);
+            //复制给映射名字
+            break;
+        }
+    }
+    for (int i = 0; i < dish_count; i++) {//遍历整个菜谱
+        if (strcmp(dishes[i].name, mappedName) == 0) {
+        // 检查当前菜品名称
+            printf("确定要删除么？(y/n)\n");
+            //再次询问，以免误删
+            char isTure;
+            while (getchar() != '\n');
+            //去掉换行符
+            scanf("%c",&isTure);
+            if(isTure == 'y'){
+                for (int j = i; j < dish_count - 1; j++) {
+                // 将后续菜品向前移动一位，覆盖掉要删除的菜品
+                    dishes[j] = dishes[j + 1];
+                }
+                dish_count--;
+                printf("已删除。\n");
+                found = 1;
+                save_to_file();
+                break;
+            }
+            else{
+                printf("已取消删除。\n");
+                system("pause");
+                return ;
+            }
+        }
+    }
+    if (!found) {
+        printf("未找到该菜名，请重试。\n");
+    }
+    system("pause");
+}
+```
 
-前10%一等奖
+### 个性化推荐机制：
+有时，我们会面临不知吃什么的难题，这时我们的推荐系统就可以很好的帮助我们解决这个问题，在个性化口味的同时，为您推荐公认的高分菜！
+```c
+void recommend() {
+    system("cls");
+    int count = 0;
+    UserProfile profile;//定义一个结构体变量，方便后续添加新的功能
+    printf("请输入您的爱好(麻辣,咸鲜等): ");
+    scanf("%s", profile.personality);
+    getchar(); // 清除缓冲区中的换行符
+    char recommended_cuisine[20] = ""; // 初始化为空字符串。
+    if (strcmp(profile.personality, "麻辣") == 0 || strcmp(profile.personality, "") == 0) {//匹配爱好与菜系
+        strcpy(recommended_cuisine, "川菜");
+    } else if (strcmp(profile.personality, "咸鲜") == 0 || strcmp(profile.personality, "浓厚") == 0) {
+        strcpy(recommended_cuisine, "鲁菜");
+    } else if (strcmp(profile.personality, "清淡") == 0 || strcmp(profile.personality, "鲜美") == 0) {
+        strcpy(recommended_cuisine, "粤菜");
+    } else if (strcmp(profile.personality, "清新") == 0 || strcmp(profile.personality, "鲜嫩") == 0) {
+        strcpy(recommended_cuisine, "淮扬菜");
+    } else if (strcmp(profile.personality, "滑爽") == 0 || strcmp(profile.personality, "清香") == 0) {
+        strcpy(recommended_cuisine, "浙菜");
+    } else if (strcmp(profile.personality, "醇厚") == 0 || strcmp(profile.personality, "色香味俱全") == 0) {
+        strcpy(recommended_cuisine, "徽菜");
+    } else if (strcmp(profile.personality, "咸香") == 0 || strcmp(profile.personality, "酸辣") == 0) {
+        strcpy(recommended_cuisine, "湘菜");
+    } else if (strcmp(profile.personality, "新奇") == 0 || strcmp(profile.personality, "荤香") == 0) {
+        strcpy(recommended_cuisine, "闽菜");
+    } else {
+        printf("很抱歉，系统还在适应你的习惯\n");
+        return; // 如果性格不匹配任何菜系，则返回。
+    }
+    printf("推荐的菜系为：%s\n", recommended_cuisine); // 输出推荐的菜系。
+    DISH recommended[SIZE];//定义结构体数组
+    for (int i = 0; i < dish_count; i++) {
+        if (dishes[i].score >= 5 && strcmp(dishes[i].cuisine, recommended_cuisine) == 0 ) {
+        // 假设评分大于等于5且复合用户口味为好菜
+            recommended[count++] = dishes[i];
+        }
+    }
+    if (count > 0) {
+        printf("推荐的菜品有:\n");
+        for (int i = 0; i < count && i<3; i++) {//推荐三道好菜
+            printf("%d. %s %s- 评分：%d\n", i + 1, recommended[i].name, recommended[i].cuisine, recommended[i].score);
+        }
+    } else {
+        printf("没有推荐的菜品。\n");
+    }
+    system("pause");
+}
+```
+# 演示视频
 
-前30%二等奖
-
-前60%三等奖
-
-前80%优秀奖
-
-已知小蓝的成绩及其他所有考生的成绩，你能帮助小蓝计算一下他能获得的证书等级吗？
-
-【输入】
-第一行为一个整数 score(0≤score≤100) 代表小蓝的成绩。
-
-第二行为一个整数 n，(10≤n≤1000) 代表参加测评的总人数。
-
-第三行为 n−1个整数，每个整数代表每个参加测评考生（除了小蓝）的成绩，成绩范围是：0≤score≤100。
-
-【输出】
-A、B、C、D、E 五个字母，分别代表一、二、三等奖，优秀奖及没有奖。注意：分数相同则等级相同，后续选手排名顺延。
-
-【输入样例】
-95 
-
-10 
-
-99 99 90 80 70 71 78 77 60
-
-【输出样例】
-B（5分）
-
----
-3.墨点覆盖
-【题目描述】
-D在做图纸上的二维坐标系里画了 n 个点，现在已知第 i个点的坐标是 (xi,yi)，但她现在不小心将墨水倒在了纸上，现在假设墨水覆盖的地方是一个圆形，而这个圆的圆心坐标和半径也已知，请问墨水覆盖了多少个点。
-
-【输入】
-第一行一个整数表示 n。
-
-第二行三个整数 X,Y,R 分别表示圆心的坐标和半径。
-
-接下来 n 行，每行两个整数 xi,yi表示点的坐标。
-
-【输出】
-共一行，输出有多少个点被覆盖了。
-
-【输入样例】
-5
-
-1 5 8 
-
-2 5 
-
-3 5 
-
-3 4
-
-2 3 
-
-20 20
-
-【输出样例】
-
-4（5分）
-
-
-## 代码展示
-
+<iframe src="//player.bilibili.com/player.html?bvid=BV15aPFedEj9&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
