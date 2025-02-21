@@ -1,0 +1,37 @@
+---
+layout:     post
+title:      "【身份证管理系统展示材料】"
+subtitle:   "\"I have a dream\""
+date:       2024-12-14 00:00:00
+author:     2024级软件工程01班石美琪
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+
+---
+
+# 作品简介
+
+本程序旨在提供一套人员信息管理系统，具备以下三大核心功能：   
+1.	人员信息管理：
+添加人员：用户可以输入身份证号码和姓名来新增一条人员记录。
+删除人员：输入身份证号，并询问是否确定删除。
+修改信息：允许对已有的人员信息(姓名和地址)进行更新或修正，以保持数据的最新状态。   
+2.	搜索与查询：
+本模块提供了多样化的查询选项，用户可以根据需要选择查询特定人员的地址、生日、年龄或获取该人员的所有信息。   
+3.	出生日期排序：
+该功能基于身份证号码中编码的出生年月日信息，能够按照信息录入顺序或出生日期先后对所有记录进行排序展示。这有助于用户更直观地管理和分析人员信息。   
+
+程序设计充分利用了中国身份证号码所蕴含的信息（如出生日期和地区代码），通过解析这些数字，自动计算并呈现相关人员的具体信息。因此，在使用过程中，只需提供身份证号码和姓名即可完成上述功能的操作。
+
+---
+
+# 程序特色
+### 计算地址函数：
+
+
+### 添加人数函数：
+
+
+# 演示视频
+
+<iframe src="//player.bilibili.com/player.html?bvid=BV15hPFe4ED8&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
