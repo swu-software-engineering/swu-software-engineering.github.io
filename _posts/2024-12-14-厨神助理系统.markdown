@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "【厨神助理系统】"
-subtitle:   "I have a dream"
+subtitle:   "\"I have a dream\""
 date:       2024-12-14 00:00:00
 author:     2024级软件工程01班姬子鹏
 header-img: "img/post-bg-2015.jpg"

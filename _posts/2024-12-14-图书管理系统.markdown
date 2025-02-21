@@ -1,0 +1,118 @@
+---
+layout:     post
+title:      "【图书管理系统】"
+subtitle:   "\"book book books\""
+date:       2024-12-14 00:00:00
+author:     2024级软件工程01班罗杰
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+
+---
+
+# 作品简介
+
+图书管理系统
+能实现登录、注册，有着账号权限。
+操作上有借阅、归还、和搜索书籍及查看库存等基本功能。
+
+---
+
+# 程序特色
+### 查看库存：
+
+```c
+void lookall()//查看库存
+{
+    struct Book *p;
+    p=&book;
+    FILE * file;
+    file=fopen("书籍库存信息.txt","r");
+    if(file==NULL)
+    {
+        printf ("文件丢失，请检查‘书籍库存信息.txt’");
+    }
+    while(!feof(file))
+    {
+        fscanf (file,"%s %s %s %d %d",p->name,p->author,p->number,&p->coin,&p->status);
+        printf ("《%s》%s %s  ",p->name,p->author,p->number);
+        switch(p->status)
+            {
+                case 0 : printf ("未借出\n\n");
+                break;
+                case 1 : printf ("已借出\n\n");
+            }
+    }
+}
+```
+
+### 查找书籍：
+
+```c
+void findbook()//查找书籍
+{
+    int t=0;
+    struct Book findbook;
+    struct Book *p;
+    p=&findbook;
+    printf ("请输入书名：");
+    scanf ("%s",book.name);
+    printf ("\n");
+    FILE * file;
+    file=fopen("书籍库存信息.txt","r");
+    if(file==NULL)
+    {
+        printf ("文件丢失，请检查‘书籍库存信息.txt’");
+    }
+    while(!feof(file))//循环读取直到文件结束
+    {
+        fscanf (file,"%s %s %s %d %d",p->name,p->author,p->number,&p->coin,&p->status);
+        if (strcmp(p->name,book.name)==0)
+        {
+            t++;
+            printf ("《%s》 %s %s  ",p->name,p->author,p->number);
+            switch(p->status)
+            {
+                case 0 : printf ("未借出\n\n");
+                break;
+                case 1 : printf ("已借出\n\n");
+            }
+        }
+    }
+    fclose (file);
+    if (t==0)
+    {
+        printf ("未找到此书\n\n");
+    }
+    else
+        printf ("找到%d个结果\n\n",t);
+    while(1)
+    {
+        printf("1-前往借阅     2-返回菜单\n\n");
+        printf ("继续操作：");
+        scanf("%d",&t);
+        printf ("\n");
+        switch(t)
+        {
+            case 1 : switch(user.usertype)
+                         {
+                              case 'A' :
+                              case 'B' : borrowbook();
+                              break;
+                              default : printf ("请先登录\n\n");
+                              k=0;
+                         }
+            break;
+            case 2 : ;
+            break;
+            default : printf ("出错了，重新选择\n\n");
+        }
+        if(t==1||t==2)
+        {
+            break;
+        }
+    }
+}
+```
+# 演示视频
+
+<iframe src="//player.bilibili.com/player.html?bvid=BV1MyPFemERi&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
