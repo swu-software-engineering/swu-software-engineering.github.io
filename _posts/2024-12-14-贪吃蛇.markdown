@@ -8,7 +8,7 @@ header-img: "img/post-bg-2015.jpg"
 catalog: true
 
 ---
-
+![贪吃蛇](https://raw.githubusercontent.com/swu-software-engineering/swu-software-engineering.github.io/refs/heads/master/img/in-post/%E8%B4%AA%E5%90%83%E8%9B%87.png)
 # 贪吃蛇制作思路：
 首先考虑需要做什么 
 基本元素：地图，食物，蛇  
@@ -42,6 +42,7 @@ ps.运行界面是以左上角为坐标原点，→x轴（列）↓y轴（行）
 分析代码：  
 用的vs code 2022 使用EasyX库  
 具体使用教程参考：https://easyx.cn/easyx-20230723  
+![easyx](https://raw.githubusercontent.com/swu-software-engineering/swu-software-engineering.github.io/refs/heads/master/img/in-post/easyx.png)
 
 ---
 
