@@ -1,0 +1,45 @@
+---
+layout:     post
+title:      "【伪3d贪吃蛇】"
+subtitle:   "\"snake snack\""
+date:       2024-12-14 00:00:00
+author:     2024级软件工程03班邬明昊
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+
+---
+# 程序特色
+### 类鱼眼：
+
+```c
+
+Point fisheyes(Point p, int R) //类鱼眼
+{
+	if (pmod(p) == 0) return p;
+	Point temp = numcom(p, 1 / pmod(p));
+	double l = R * atan(pmod(p) / R);
+	temp = numcom(temp, l);
+	return temp;
+}
+```
+
+### 克隆处理：
+
+```c
+void Clonecheck(Snake* player, Snake* clone)//克隆处理
+{
+	if (player->energy > 300 && player->clone == 'p' && clone->state != 'c')
+	{
+		FreeList(&(clone->head));
+		(*clone) = (*player);
+		player->energy -= 300;
+		player->clone = ' ';
+		clone->head = CreateNode(player->head->data);
+		clone->state = 'c';
+	}
+}
+
+```
+# 演示视频
+
+<iframe src="//player.bilibili.com/player.html?bvid=BV1LbPFeZEPC&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>

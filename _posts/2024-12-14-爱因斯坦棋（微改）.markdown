@@ -1,0 +1,21 @@
+---
+layout:     post
+title:      "【爱因斯坦棋（微改）】"
+subtitle:   "\"E = mcc\""
+date:       2024-12-14 00:00:00
+author:     2024级软件工程01班姚明强
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+
+---
+
+# 程序特色
+### 棋子移动：
+![棋子移动](https://raw.githubusercontent.com/swu-software-engineering/swu-software-engineering.github.io/refs/heads/master/img/in-post/%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%E6%A3%8B-%E6%A3%8B%E5%AD%90%E7%A7%BB%E5%8A%A8.jpg)
+
+### 游戏逻辑：
+![游戏逻辑](https://raw.githubusercontent.com/swu-software-engineering/swu-software-engineering.github.io/refs/heads/master/img/in-post/%E7%88%B1%E5%9B%A0%E6%96%AF%E5%9D%A6%E6%A3%8B-%E6%B8%B8%E6%88%8F%E9%80%BB%E8%BE%91.jpg)
+
+# 演示视频
+
+<iframe src="//player.bilibili.com/player.html?bvid=BV15hPFe4E9h&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>

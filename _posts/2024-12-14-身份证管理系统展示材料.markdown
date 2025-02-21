@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "【身份证管理系统展示材料】"
-subtitle:   "\"I have a dream\""
+subtitle:   "\"identity card\""
 date:       2024-12-14 00:00:00
 author:     2024级软件工程01班石美琪
 header-img: "img/post-bg-2015.jpg"
@@ -27,10 +27,10 @@ catalog: true
 
 # 程序特色
 ### 计算地址函数：
-
+![计算地址函数](https://raw.githubusercontent.com/swu-software-engineering/swu-software-engineering.github.io/refs/heads/master/img/in-post/%E8%AE%A1%E7%AE%97%E5%9C%B0%E5%9D%80%E5%87%BD%E6%95%B0.png)
 
 ### 添加人数函数：
-
+![添加人数函数](https://raw.githubusercontent.com/swu-software-engineering/swu-software-engineering.github.io/refs/heads/master/img/in-post/%E6%B7%BB%E5%8A%A0%E4%BA%BA%E6%95%B0%E5%87%BD%E6%95%B0.png)
 
 # 演示视频
 

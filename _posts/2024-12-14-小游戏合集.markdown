@@ -1,0 +1,21 @@
+---
+layout:     post
+title:      "【小游戏合集】"
+subtitle:   "\"play games\""
+date:       2024-12-14 00:00:00
+author:     2024级软件工程03班张能奥
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+
+---
+
+# 程序特色
+### 加密：
+![加密](https://raw.githubusercontent.com/swu-software-engineering/swu-software-engineering.github.io/refs/heads/master/img/in-post/%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%90%88%E9%9B%86-%E5%8A%A0%E5%AF%86.png)
+
+### 排行榜：
+![排行榜](https://raw.githubusercontent.com/swu-software-engineering/swu-software-engineering.github.io/refs/heads/master/img/in-post/%E5%B0%8F%E6%B8%B8%E6%88%8F%E5%90%88%E9%9B%86-%E6%8E%92%E8%A1%8C%E6%A6%9C.png)
+
+# 演示视频
+
+<iframe src="//player.bilibili.com/player.html?bvid=BV1JHPFeYE5i&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>

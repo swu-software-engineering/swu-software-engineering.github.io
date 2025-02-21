@@ -1,0 +1,169 @@
+---
+layout:     post
+title:      "【贪吃蛇】"
+subtitle:   "\"GREEDY SNACK GAME\""
+date:       2024-12-14 00:00:00
+author:     2024级软件工程04班黄道帅
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+
+---
+
+# 贪吃蛇制作思路：
+首先考虑需要做什么 
+基本元素：地图，食物，蛇  
+提示信息  
+元素的属性（结构体封装一下）：  
+python用类来创建对象类型，包含它的属性和各种特征以及函数  
+地图：大小（自己设定，不能超过窗口大小，事先预估）  
+墙的坐标  
+食物：数量，坐标  
+蛇：蛇头与蛇身不一样，所以蛇头属性与蛇身属性用两个单独的结构体储存坐标   
+蛇长。   
+二维数组（二维平面）来标记每个位置是什么:整形数组>>宏定义  
+方便后面判断不用看一堆数字。  
+基本功能（函数实现)：1.生成食物（随机函数）  
+2.蛇的移动（初始化蛇>>画蛇）  
+怎么呈现移动的效果呢（好问题）  
+首先要判断移动方向>>>>键盘按键获取  
+假设现在每个单位长度是1  
+ps.运行界面是以左上角为坐标原点，→x轴（列）↓y轴（行）  
+向上（y-=1)  
+向右 （x+=1）  
+呈现移动：改变方向：蛇头在原来位置基础上根据按键获取改变坐标，画蛇头  
+移动：从头部开始蛇身每一节坐标变成上一节坐标，最后一个位置把他画空  
+整体循环展示就可以得到移动的效果  
+3.蛇吃食物>>蛇属性变长一节>>食物消失--->功能1  
+4.蛇的死亡--蛇头碰到墙/蛇头碰到蛇身  
+怎么判断是吃到食物还是没吃到食物，怎么判断碰到墙/碰到蛇身  
+这就需要用一个二维数组（二维平面）来标记每个位置是什么  
+5.读取分数，显示分数  
+6.询问是否在来一局 Y/N  
+分析代码：  
+用的vs code 2022 使用EasyX库  
+具体使用教程参考：https://easyx.cn/easyx-20230723  
+
+---
+
+# 程序特色
+### 判断得分与结束
+
+```c
+//判断得分与结束
+void JudgeFunc(int x, int y) {
+	char word_1[] = "恭喜你打破最高记录，最高记录更新为";
+	char word_2[] = "与最高记录持平，加油再创佳绩";
+	char word_3[] = "请继续加油，当前与最高记录相差";
+	char wordquestion[] = "再来一局?(y/n):";
+	char s_8[] = "当前得分:";
+	//若蛇头即将到达的位置是食物，则得分
+	if (face[snake.y + y][snake.x + x] == FOOD) {
+		INITFOOD--;
+		snake.len++; //蛇身加长
+		grade += 10; //更新当前得分
+		outtextxy(1550, 500, s_8);
+		char GRADE_2[20];
+		sprintf(GRADE_2, "%d", grade);
+		outtextxy(1350, 500, GRADE_2);
+		RandFood(); //重新随机生成食物
+	}
+	else if (face[snake.y + y][snake.x + x] == BOMB) {
+		cleardevice();
+		main();
+	}
+	//若蛇头即将到达的位置是墙或者蛇身，则游戏结束
+	else if (face[snake.y + y][snake.x + x] == WALL || face[snake.y + y][snake.x + x] == BODY) {
+		closegraph();
+		initgraph(900, 775);
+		setbkmode(TRANSPARENT);//设置背景为透明
+		IMAGE img;/*声明一个IMAGE变量*/
+		loadimage(&img, "./11.jpg", 900, 785);/*变量地址，图片地址    相对地址“./”本目录下的文件进行访问   图片展示可以是png也可以是jpg 缩放大小*/
+		putimage(0, 0, &img);/*展示图片*/
+		if (grade > max) {
+			settextcolor(RGB(0, 0, 0));
+			settextstyle(35, 0, _T("华文新魏"));//设置字号、字体
+			outtextxy(150, 250, word_1);
+			char GRADE_1[20];
+			sprintf(GRADE_1, "%d", grade);
+			outtextxy(450, 250, GRADE_1);
+			WriteGrade();
+		}
+		else if (grade == max) {
+			settextcolor(RGB(0, 0, 0));
+			settextstyle(35, 0, _T("华文新魏"));//设置字号、字体
+			outtextxy(150, 250, word_2);
+		}
+		else {
+			settextcolor(RGB(0, 0, 0));
+			settextstyle(35, 0, _T("华文新魏"));//设置字号、字体
+			outtextxy(150, 250, word_3);
+			char GRADE_2[20];
+			sprintf(GRADE_2, "%d", max - grade);
+			outtextxy(650, 250, GRADE_2);
+		}
+		char b[] = "GAME OVER";
+		settextcolor(RGB(0, 0, 0));
+		settextstyle(35, 0, _T("华文新魏"));//设置字号、字体
+		outtextxy(150, 300, b);
+		while (1) { //询问玩家是否再来一局
+			char c[] = "是否再来一局(Y/y或N/n)";
+			settextcolor(RGB(0, 0, 0));
+			settextstyle(35, 0, _T("华文新魏"));//设置字号、字体
+			outtextxy(150, 350, c);
+			char ch = _getch();
+			if (ch == 'y' || ch == 'Y') {
+				cleardevice();
+				main();
+			}
+			else if (ch == 'n' || ch == 'N') {
+				exit(0);
+			}
+
+		}
+	}
+}
+
+```
+### 游戏主体逻辑函数
+
+```c
+//游戏主体逻辑函数
+void Game() {
+	int n =	RIGHT; //开始游戏时，默认向下移动
+	goto first; 
+	while (1) {
+		n = getch(); //读取键值
+		DrawFood();
+	first: //先向默认方向前进
+		switch (n) {
+		case UP: //方向键：上
+			run(0, -25); 
+			break;
+		case DOWN: //方向键：下
+			run(0, 25);
+			break;
+		case LEFT: //方向键：左
+			run(-25, 0); 
+			break;
+		case RIGHT: //方向键：右
+			run(25, 0); 
+			break;
+		case SPACE: //暂停
+			system("pause>nul"); 
+			break;
+		case ESC: //退出
+			cleardevice();
+			exit(0);
+		case 'r':
+		case 'R': //重新开始
+			cleardevice();
+			main(); //重新执行主函数
+		}
+	}
+}
+```
+
+
+# 演示视频
+
+<iframe src="//player.bilibili.com/player.html?bvid=BV1JHPFeYEjv&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
