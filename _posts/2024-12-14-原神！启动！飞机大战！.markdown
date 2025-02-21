@@ -1,0 +1,119 @@
+---
+layout:     post
+title:      "【原神！启动！飞机大战！】"
+subtitle:   "\"Genshin Impact\""
+date:       2024-12-14 00:00:00
+author:     2024级软件工程04班符鑫
+header-img: "img/post-bg-2015.jpg"
+catalog: true
+
+---
+
+# 作品简介
+
+在飞机大战的基础上添加了原神的一些元素
+
+---
+
+# 程序特色
+### 碰撞检测：
+在实际生活中，我们常常会因为生活地区的不同而对相同的菜有着不同的叫法，为避免用户在使用此系统时出现以上情况，该程序采用了映射体结构来存储同名不同菜的检测。
+
+```c
+//判断是否击中     用图片之间距离判断
+void hit()
+{
+	char time_text1[50]="你这个入机！";
+	settextstyle(100,0,_T("黑体")); 
+    for (int i = 0; i < enemy_num; i++)
+    {
+        if (!enemy[i].live)
+            continue;
+        for (int j = 0; j < bullet_num; j++)
+        {
+            if (!bulle[j].live)
+                continue;
+            if (bulle[j].x > enemy[i].x && 
+                bulle[j].x < enemy[i].x + enemy[i].width && 
+                bulle[j].y > enemy[i].y &&
+                bulle[j].y < enemy[i].y + enemy[i].height)
+            {
+                bulle[j].live = false;
+                enemy[i].hp--;
+ 				music1();
+            }
+        }
+        if (enemy[i].hp <= 0) 
+		{
+			enemy[i].live = false;
+			kill++;
+		}
+    }
+    for (int i = 0; i < enemy_num; i++)//敌机撞上我机 
+    {
+        if (myplane.x + myplane.width >= enemy[i].x &&
+            myplane.x <= enemy[i].x + enemy[i].width &&
+            myplane.y <= enemy[i].y + enemy[i].height &&
+            myplane.y + myplane.height >= enemy[i].y)
+        {
+            myplane.live = false;
+        }
+    }
+    if (myplane.live == false)//死亡结局  3个 
+    {
+    	
+    	mciSendString("stop miao ",NULL,0,NULL);
+    	mciSendString("stop cao ",NULL,0,NULL);
+    	mciSendString("stop ai",NULL,0,NULL);
+    	mciSendString("close ai",NULL,0,NULL);
+		mciSendString("close miao",NULL,0,NULL);	
+  		mciSendString("close cao",NULL,0,NULL);    
+		  	if(kill<1*kill_num)
+    	{
+    		putimage(0,0,&image_end[1]);
+    		mciSendString("stop ruji",NULL,0,NULL);	//这样把音乐文件关闭，就可以实现反复触发同一
+			//											结局并且有声音 
+    		mciSendString("close ruji",NULL,0,NULL);
+    		mciSendString("open 游戏音乐\\报道.mp3 alias ruji",NULL,0,NULL);
+    		mciSendString("play ruji ",NULL,0,NULL);
+			outtextxy(0,0,time_text1);
+		}
+		if(kill>=1*kill_num&&kill<2*kill_num)
+		{
+			mciSendString("stop end2",NULL,0,NULL);	
+    		mciSendString("close end2",NULL,0,NULL);
+			mciSendString("open 游戏音乐\\琴.mp3 alias end2",NULL,0,NULL);
+    		mciSendString("play end2",NULL,0,NULL);
+    		mciSendString("setaudio end2 volume to 200",0,0,0);
+			putimage(0,0,&image_end[2]);
+			outtextxy(0,0,time_text1);
+ 		}
+ 		if(kill>=2*kill_num&&kill<3*kill_num)
+ 		{
+ 			mciSendString("stop end5",NULL,0,NULL);	
+    		mciSendString("close end5",NULL,0,NULL);
+ 			mciSendString("open 游戏音乐\\火花.mp3 alias end5",NULL,0,NULL);
+			mciSendString("play end5 ",NULL,0,NULL);
+ 			putimage(0,0,&image_end[3]);
+ 			outtextxy(0,0,time_text1);
+		 }
+		 if(kill>=3*kill_num)
+		 {
+		 	mciSendString("stop end6",NULL,0,NULL);	
+    		mciSendString("close end6",NULL,0,NULL);
+		 	mciSendString("open 游戏音乐\\炸完.mp3 alias end6",NULL,0,NULL);
+			mciSendString("play end6 ",NULL,0,NULL);
+ 			putimage(0,0,&image_end[4]);
+ 			//settextstyle(40,0,_T("黑体")); 
+ 			//outtextxy(0,0,"你不是人机，并且获得了打榜的机会");		 	
+		 }
+		 botton_num++;
+		shubiao();
+    }
+}
+
+```
+
+# 演示视频
+
+<iframe src="//player.bilibili.com/player.html?bvid=BV15vPweaEoi&page=1&high_quality=1&danmaku=0" allowfullscreen="allowfullscreen" width="100%" height="500" scrolling="no" frameborder="0" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts"></iframe>
